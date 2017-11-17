@@ -3,12 +3,17 @@ import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.File;
 import java.time.LocalDate;
 
 public class Cache {
     private ApiResponse lastChecked = null;
 
     public boolean isInCache(String[] currency) throws IOException {
+        File folder = new File("Cache");
+        if (!folder.exists()) {
+            folder.mkdir();
+        }
         String data;
         try(FileReader reader = new FileReader("Cache\\" + currency[0] + currency[1] + ".txt")) {
             BufferedReader br = new BufferedReader(reader);
